@@ -33,10 +33,8 @@ subReply.subscribe('reply', function (err, count) {
           }
           var others = {
             screen_name: reply.user.screen_name,
-          }
-          if (reply.in_reply_to_status_id) {
-            others.in_reply_to_status_id = reply.in_reply_to_status_id;
-
+            in_reply_to_user_id: reply.user.id,
+            in_reply_to_status_id: reply.id
           }
           console.log('reply:',reply);
           console.log('replyOthers:',others)
