@@ -14,7 +14,8 @@ function postMessage(post, others,callback) {
       status: post.text.length > 140?post.text.substr(0,140):post.text,
       format: 'html'
     },others)
-    
+    console.log('others:',others);
+    console.log('obj:',obj);
   }
   sign.getAccessDict(obj, function (err, dict) {
     console.log(dict)
