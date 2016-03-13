@@ -22,10 +22,10 @@ subReply.subscribe('reply', function (err, count) {
           // console.log('replyID',replyID)
           redis.set('fanfou_reply_since_id',replyID);
         }
-        console.log('---------')
+        // console.log('---------')
         for (var i = replies.length - 1; i >= 0; i--) {
           var reply = replies[i];
-          console.log(reply.id, reply.text);
+          // console.log(reply.id, reply.text);
           if (/^/) {}
           var replyObj = {
             info: reply.text.replace(/^@聊天机器人\s{1,}/g,''),
@@ -42,7 +42,7 @@ subReply.subscribe('reply', function (err, count) {
             others:others
           }))
         }
-          console.log('---------')
+          // console.log('---------')
       })  
     })
   }, sched);
@@ -55,12 +55,12 @@ subReply.on('message', function (channel, message) {
     // console.log(post)
     // console.log(post.code)
     post.text = ('@'+all.others.screen_name+' '+post.text).replace('<br>','\n');
-    console.log(post)
-    console.log("========")
+    // console.log(post)
+    // console.log("========")
     if(post.code){
-      // postMessage(post, all.others, function (error, result) {
+      postMessage(post, all.others, function (error, result) {
       //   // console.log(result)
-      // })
+      })
     }
   })
 })
