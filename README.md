@@ -14,9 +14,7 @@
   - 本机访问 `{hostname:port}/fanfou/chatbot/oauth`
 
 ### start
-- 启动定时服务
-
-
+- 启动定时服务 `node do/do.js`
 
 技术栈
 ---
