@@ -9,7 +9,7 @@ var pubReply = new Redis();
 var subReply = new Redis();
 var redis = new Redis()
 
-var sched = later.parse.recur().every(40).second()
+var sched = later.parse.recur().every(10).second()
 
 subReply.subscribe('reply', function (err, count) {
   later.setInterval(function () {
