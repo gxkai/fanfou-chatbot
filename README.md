@@ -7,7 +7,7 @@
 `npm install`
 
 ### init
-- 填写 `config.js`
+- 填写 `config.test.js`, 并改名成`config.js`
 - 本机启动 `redis-server`
 - 获取 `oauth` 信息
   - `node bin/www`
