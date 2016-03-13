@@ -28,8 +28,8 @@ function postMessage(post, others,callback) {
           form: dict
         },
           function (error, response, body) {
+            console.log(error+' : '+body)
             callback(error, body)
-            // console.log(req.session.fanfouOauth)          
           }
         )
       })
