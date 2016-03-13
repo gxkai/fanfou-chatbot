@@ -17,6 +17,7 @@ function postMessage(post, others,callback) {
     
   }
   sign.getAccessDict(obj, function (err, dict) {
+    console.log(dict)
     sign.signatureAccess ('POST', base_url, dict, function (err1, oauth_signature) {
       _.assign(dict,obj,{
         oauth_signature:oauth_signature
