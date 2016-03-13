@@ -16,24 +16,25 @@ function postMessage(post, others,callback) {
     },others)
     console.log('others:',others);
     console.log('obj:',obj);
-  }
-  sign.getAccessDict(obj, function (err, dict) {
-    console.log(dict)
-    sign.signatureAccess ('POST', base_url, dict, function (err1, oauth_signature) {
-      _.assign(dict,obj,{
-        oauth_signature:oauth_signature
+    sign.getAccessDict(obj, function (err, dict) {
+      console.log('AccessDict:',dict)
+      sign.signatureAccess ('POST', base_url, dict, function (err1, oauth_signature) {
+        _.assign(dict,obj,{
+          oauth_signature:oauth_signature
+        })
+        console.log('PostDict:',dict)
+        request.post({
+          url: base_url,
+          form: dict
+        },
+          function (error, response, body) {
+            callback(error, body)
+            // console.log(req.session.fanfouOauth)          
+          }
+        )
       })
-      request.post({
-        url: base_url,
-        form: dict
-      },
-        function (error, response, body) {
-          callback(error, body)
-          // console.log(req.session.fanfouOauth)          
-        }
-      )
     })
-  })
+  }
 }
 
 // get Replies
