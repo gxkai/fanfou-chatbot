@@ -20,7 +20,7 @@ function postMessage(post, others,callback) {
       console.log('AccessDict:',dict)
       sign.signatureAccess ('POST', base_url, dict, function (err1, oauth_signature) {
         _.assign(dict,obj,{
-          oauth_signature:oauth_signature
+          oauth_signature:encodeURIComponent(oauth_signature)
         })
         console.log('PostDict:',dict)
         request.post({
