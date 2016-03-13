@@ -35,8 +35,11 @@ subReply.subscribe('reply', function (err, count) {
             screen_name: reply.user.screen_name,
           }
           if (reply.in_reply_to_status_id) {
-            others.in_reply_to_status_id = reply.in_reply_to_status_id
+            others.in_reply_to_status_id = reply.in_reply_to_status_id;
+
           }
+          console.log('reply:',reply);
+          console.log('replyOthers:',others)
           pubReply.publish('reply',JSON.stringify({
             reply:replyObj,
             others:others
