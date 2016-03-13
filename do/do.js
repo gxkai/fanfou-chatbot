@@ -15,12 +15,20 @@ subReply.subscribe('reply', function (err, count) {
   later.setInterval(function () {
     redis.get('fanfou_reply_since_id',function (err1,since_id) {
       getReplies(since_id?{since_id:since_id}:{count:'1'},function (replies) {
-        var replies = JSON.parse(replies)
         // console.log(replies)
+        var replies = JSON.parse(replies)
+        if (replies[0]) {
+          var replyID = replies[0].id
+          // console.log('replyID',replyID)
+          redis.set('fanfou_reply_since_id',replyID);
+        }
+        console.log('---------')
         for (var i = replies.length - 1; i >= 0; i--) {
           var reply = replies[i];
+          console.log(reply.id, reply.text);
+          if (/^/) {}
           var replyObj = {
-            info: reply.text.replace(/^@聊天机器人\s{1,}/,''),
+            info: reply.text.replace(/^@聊天机器人\s{1,}/g,''),
             userid: reply.user.id,
           }
           var others = {
@@ -34,11 +42,7 @@ subReply.subscribe('reply', function (err, count) {
             others:others
           }))
         }
-        if (replies[replies.length-1]) {
-          var replyID = replies[replies.length-1].id
-          // console.log('replyID',replyID)
-          redis.set('fanfou_reply_since_id',replyID);
-        }
+          console.log('---------')
       })  
     })
   }, sched);
@@ -50,11 +54,13 @@ subReply.on('message', function (channel, message) {
   tuling(all.reply,function (post) {
     // console.log(post)
     // console.log(post.code)
-    post.text = '@'+all.others.screen_name+' '+post.text;
+    post.text = ('@'+all.others.screen_name+' '+post.text).replace('<br>','\n');
+    console.log(post)
+    console.log("========")
     if(post.code){
-      postMessage(post, all.others, function (error, result) {
-        // console.log(error)
-      })
+      // postMessage(post, all.others, function (error, result) {
+      //   // console.log(result)
+      // })
     }
   })
 })
