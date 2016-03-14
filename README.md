@@ -21,6 +21,7 @@
 - redis (GET SET SUB PUB)
 - express (http)
 - lodash (Object 操作)
+- later(定时任务)
 - 图灵机器人 API
 - 饭否机器人 API
 
